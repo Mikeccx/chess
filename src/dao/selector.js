@@ -1,0 +1,1 @@
+export const wikiListGetter = (state) => state.wiki_list
