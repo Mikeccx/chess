@@ -4,17 +4,10 @@ import './board.css'
 import axios from "axios";
 import { useWhyDidYouUpdate } from 'ahooks';
 import '../mock/index'
-// function Square(props) {
-//     useWhyDidYouUpdate('useWhyDidYouUpdateComponent', { ...props })
-//     return (
-//         <button className="square-button" onClick={() => props.downPieces()}>
-//             {props.display}
-//         </button>
-//     )
-// }
-// import '../mock/index'
-axios.post('/api/list', {a: 1}).then((res) => {
-    console.log('111')
+axios.post('/api/add', {name: 1}).then((res) => {
+})
+axios.post('/api/get', {a: 1}).then((res) => {
+    console.log('list')
     console.log(res)
 })
 class Square extends React.Component {
