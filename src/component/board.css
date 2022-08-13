@@ -1,0 +1,9 @@
+.square-wraper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90px;
+}
+.square-button {
+    width: 30px;
+    height: 30px;
+}
