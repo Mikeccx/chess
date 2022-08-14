@@ -15,6 +15,7 @@ export default function Modal(props) {
                     {
                         formArr.map((item) => {
                             return <Form.Item
+                                key={item.uuid}
                                 name="note"
                                 label="Note"
                                 rules={[

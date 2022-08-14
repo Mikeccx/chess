@@ -1,17 +1,25 @@
 import './modal.less'
 import { Modal, Form, Input, Button } from 'antd'
-import React, { useState, useRef } from 'react'
-import {createPortal} from 'react-dom'
-import ReactDOM from 'react-dom/client'
-
+import React, { useState } from 'react'
+import { useEffect } from 'react'
 
 export const useModal = (props) => {
     const [modalVisible, setModalVisible] = useState(false)
     const { formArr, handleOkCb } = props
-    const [form] = Form.useForm();
+    const [form] = Form.useForm()
+    // useEffect(() => {
+    //     formArr.forEach((item) => {
+    //         if (item.value) {
+    //             console.log('value: ', item.value)
+    //             form.setFieldValue({
+    //                 name: '12312'
+    //             })
+    //         }
+    //     })
+    // }, [])
     const closeModal = () => {
-        form.resetFields()
         setModalVisible(false)
+        form.resetFields()
     }
     const showModal = () => {
         setModalVisible(true)
@@ -19,9 +27,6 @@ export const useModal = (props) => {
     const handleCancel = () => {
         closeModal()
     }
-    // const handleOk = () => {
-    //     handleOkCb()
-    // }
     const content = () => {
         return (
             <>
@@ -37,7 +42,7 @@ export const useModal = (props) => {
                 }>
                     <Form
                         name="basic"
-                        initialValues={{ remember: true }}
+                        initialValues={{ remember: true, name: formArr[0].value}}
                         onFinish={(value) =>{
                             handleOkCb(value)
                         }}
@@ -46,16 +51,15 @@ export const useModal = (props) => {
                         form={form}
                         >
                         {
-                            formArr.map((item) => (
-                                <>
+                            formArr.map((item, index) => (
                                     <Form.Item
                                         label={item.title}
                                         name={item.name}
+                                        key={index}
                                         rules={[{ required: true, message: 'Please input your username!' }]}
                                     >
                                         <Input />
                                     </Form.Item>
-                                </>
                             ))
                         }
                     </Form>

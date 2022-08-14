@@ -5,8 +5,12 @@ class Dao {
     fetchList() {
         return axios.post('/api/get')
     }
-    updateCard() {}
-    deleteCard() {}
+    updateCard(data) {
+        return axios.post('/api/update', data)
+    }
+    deleteCard(arr) {
+        return axios.post('/api/delete', arr)
+    }
     addCard(data) {
         return axios.post('/api/add', data)
     }

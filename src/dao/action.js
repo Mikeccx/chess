@@ -1,11 +1,21 @@
 import { createActions } from 'redux-actions';
 import Dao from './dao'
-export const {fetchList, addCard} = createActions({
+export const {fetchList, addCard, changeSelectList, updateCard, deleteCard} = createActions({
     FETCH_LIST: (data) => {
         return data
     },
     ADD_CARD: (data) => {
         return data
+    },
+    CHANGE_SELECT_LIST: (data) => {
+        return data
+    },
+    UPDATE_CARD: (data) => {
+        return data
+    },
+    DELETE_CARD: async (data) => {
+        await Dao.deleteCard(data)
+        return {}
     }
   });
 export const getListThunkAction = (payload) => {
@@ -22,3 +32,12 @@ export const addCardThunkAction = (payload) => {
         })
     }
 }
+
+export const updateCardThunkAction = (payload) => {
+    return function(dispatch){
+        return Dao.updateCard(payload).then((res) => {
+            dispatch(updateCard())
+        })
+    }
+}
+
