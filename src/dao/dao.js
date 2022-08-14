@@ -5,7 +5,10 @@ class Dao {
     fetchList() {
         return axios.post('/api/get')
     }
-    updateCard() {}
+    updateCard(data) {
+      // debugger
+      return axios.post('/api/update',data)
+    }
     deleteCard() {}
     addCard(data) {
         return axios.post('/api/add', data)

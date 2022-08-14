@@ -25,12 +25,13 @@ Mock.mock('/api/delete','post',(id) => {
         }
 })
 // 改
-Mock.mock('/api/update','post',({uuid}) => {
+Mock.mock('/api/update','post',(data) => {
+  // debugger
+  const {uuid} = data
+  space[uuid] = data
     return {
-            data: {
-                spaces: space
-            }
-        }
+        success: true
+    }
 })
 // 获取列表
 Mock.mock('/api/get','post',(op) => {
