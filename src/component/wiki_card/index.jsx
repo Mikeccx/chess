@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {Checkbox} from 'antd'
 import './wiki_card.less'
 import { useModal } from '../../hooks/modal/useModal'
@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 export default function WikiCard (props) {
     const { selectOp } = props
     const { name, uuid } = props.info
+    // console.log('name', name)
     const dispatch = useDispatch()
     // 设置选中的卡片
     const cb = (e) => {
@@ -23,12 +24,14 @@ export default function WikiCard (props) {
         setCheck(!isChecked)
     }
     // 用于修改后确认
-    const handleOkModal = ()=>{
+    const handleOkModal = (updatedValue)=>{
+      // console.log('ok', updatedValue)
+      const {name} = updatedValue
       dispatch(updateCardThunkAction({name, uuid}))
       dispatch(getListThunkAction())
-      console.log('ok')
 
     }
+
     const { showModal, closeModal , content: ModalComponent } = useModal(
       {
         formArr: [{title: '空间名', name: 'name'}],
@@ -36,7 +39,6 @@ export default function WikiCard (props) {
           zoneValue: name,
           modelTitle: '修改'
         },
-
         handleOkCb: handleOkModal
       }
     )
@@ -54,7 +56,15 @@ export default function WikiCard (props) {
                         <div className='title'>{name}</div>
                         <div className='title'>{uuid}</div>
                     </div>
-                    <Checkbox onChange={(e) => selectCard(e)} checked={isChecked}>
+                    <Checkbox 
+                      onChange={(e) => {
+                        selectCard(e)
+                      }} 
+                      onClick={(e)=>{
+                        e.stopPropagation()
+                      }}
+                      checked={isChecked}
+                    >
                     </Checkbox>
                 </div>
                 <div className=''>

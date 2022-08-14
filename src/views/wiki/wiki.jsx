@@ -1,7 +1,7 @@
 import './wiki.less'
 import {useState} from 'react'
 import WikiCard from '../../component/wiki_card'
-import {getListThunkAction} from '../../dao/action'
+import {getListThunkAction, setSelectListAction } from '../../dao/action'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { wikiListGetter } from '../../dao/selector'
@@ -20,13 +20,25 @@ export default function Wiki() {
       // console.log(`id:${id}, actionType:${actionType}`)
       switch(actionType){
         case 'ADD':
-          setSelectList([...selectList, wikiList[id]])
+          const newList = [...selectList, wikiList[id].uuid]
+          Promise.resolve().then(()=>{
+            setSelectList(newList)
+          }).then(()=>{
+            // debugger
+            disPatch(setSelectListAction(newList))
+          })
           break
         case 'DEL':
-          const index = selectList.findIndex(item => item.uuid === id)
-          setSelectList([...selectList.slice(0,index), ...selectList.slice(index+1)])
+          const index = selectList.findIndex(item => item === id)
+          const newList2 = [...selectList.slice(0,index), ...selectList.slice(index+1)]
+          Promise.resolve().then(()=>{
+            setSelectList(newList2)
+          }).then(()=>{
+            disPatch(setSelectListAction(newList2))
+          })
           break
       }
+
     }
     return (
         <>

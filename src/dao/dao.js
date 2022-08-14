@@ -9,7 +9,9 @@ class Dao {
       // debugger
       return axios.post('/api/update',data)
     }
-    deleteCard() {}
+    deleteCard(arr) {
+      return axios.post('/api/delete', arr)
+    }
     addCard(data) {
         return axios.post('/api/add', data)
     }
