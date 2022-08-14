@@ -9,7 +9,7 @@ Mock.setup({
 Mock.mock('/api/add','post',({body}) => {
     const data = JSON.parse(body)
     space.push({
-        uudi: +new Date(),
+        uuid: +new Date(),
         name: data.name
     })
     return {

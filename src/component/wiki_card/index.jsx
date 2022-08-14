@@ -10,7 +10,7 @@ export default function WikiCard (props) {
     }
     let [isChecked, setCheck] = useState(false)
     // 选中卡片
-    const selectCard = () => {
+    const selectCard = (e) => {
         if (!isChecked) {
             selectOp(uuid, 'ADD')
         } else {
@@ -20,13 +20,13 @@ export default function WikiCard (props) {
     }
     return (
         <>
-            <div className='item-wraper' onClick={() => selectCard()}>
+            <div className='item-wraper'>
                 <div className='info'>
                     <div>
                         <div className='title'>{name}</div>
                         <div className='title'>{uuid}</div>
                     </div>
-                    <Checkbox onChange={(e) => cb(e)} checked={isChecked}>
+                    <Checkbox onChange={(e) => selectCard(e)} checked={isChecked}>
                     </Checkbox>
                 </div>
                 <div className=''>

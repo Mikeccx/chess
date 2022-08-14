@@ -7,7 +7,9 @@ class Dao {
     }
     updateCard() {}
     deleteCard() {}
-    addCard() {}
+    addCard(data) {
+        return axios.post('/api/add', data)
+    }
 }
 
 export default new Dao()
