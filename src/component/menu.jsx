@@ -16,7 +16,7 @@ function getItem(label, key, icon, children, type) {
     getItem('Wiki', 'wiki', <MailOutlined />),
     getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
       getItem('主页 1', '1'),
-      getItem('wiki', 'wiki')
+      // getItem('wiki', 'wiki')
     ]),
     getItem('Navigation Three', 'sub4', <SettingOutlined />, [
       getItem('Option 9', '9'),

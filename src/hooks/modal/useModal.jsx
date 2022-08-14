@@ -7,7 +7,10 @@ import ReactDOM from 'react-dom/client'
 
 export const useModal = (props) => {
     const [modalVisible, setModalVisible] = useState(false)
-    const { formArr, handleOkCb } = props
+    const { formArr, handleOkCb, formObj={} } = props
+    const {zoneValue='', modelTitle='新增'} = formObj
+    // console.log(`props: `,props);
+    
     const [form] = Form.useForm();
     const closeModal = () => {
         form.resetFields()
@@ -19,13 +22,11 @@ export const useModal = (props) => {
     const handleCancel = () => {
         closeModal()
     }
-    // const handleOk = () => {
-    //     handleOkCb()
-    // }
+
     const content = () => {
         return (
             <>
-                <Modal title="新增" visible={modalVisible} footer={
+                <Modal title={modelTitle} visible={modalVisible} footer={
                     [
                         <Button key="back" onClick={handleCancel}>
                             取消
@@ -37,17 +38,18 @@ export const useModal = (props) => {
                 }>
                     <Form
                         name="basic"
-                        initialValues={{ remember: true }}
+                        initialValues={{ remember: true, name: zoneValue}}
                         onFinish={(value) =>{
                             handleOkCb(value)
+                            setTimeout(closeModal,200)
                         }}
                         onFinishFailed={() => {}}
                         autoComplete="off"
                         form={form}
                         >
                         {
-                            formArr.map((item) => (
-                                <>
+                            formArr.map((item,index) => (
+                                <div key={index}>
                                     <Form.Item
                                         label={item.title}
                                         name={item.name}
@@ -55,8 +57,8 @@ export const useModal = (props) => {
                                     >
                                         <Input />
                                     </Form.Item>
-                                </>
-                            ))
+                                </div>
+                            )) 
                         }
                     </Form>
                 </Modal>
