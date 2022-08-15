@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { fetchList, changeSelectList } from './action'
+import { fetchList, changeSelectList, changeTest } from './action'
 import { WIKI_LIST } from './scheme';
 import { normalize  } from 'normalizr';
 export const wikiReducer  = handleActions({
@@ -17,7 +17,21 @@ export const wikiReducer  = handleActions({
             ...state,
             selectedList: payload
         }
+    },
+    [changeTest]: (state, action) => {
+        const { payload } = action
+        return {
+            ...state,
+            test: {
+                ...state.test,
+                b: payload
+            }
+        }
     }
 }, {
-    selectedList: []
+    selectedList: [],
+    test: {
+        a: 1,
+        b: 2
+    }
 })

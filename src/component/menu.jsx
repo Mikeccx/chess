@@ -14,15 +14,10 @@ function getItem(label, key, icon, children, type) {
 
   const items = [
     getItem('Wiki', 'wiki', <MailOutlined />),
-    getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    //   getItem('wiki', 'wiki')
-    ]),
-    getItem('Navigation Three', 'sub4', <SettingOutlined />, [
-    //   getItem('Option 9', '9'),
-    //   getItem('Option 10', '10'),
-    //   getItem('Option 11', '11'),
-    //   getItem('Option 12', '12'),
-    ]),
+    getItem('home', 'home')
+    // getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
+    // //   getItem('wiki', 'wiki')
+    // ]),
   ];
 
   export default () => {

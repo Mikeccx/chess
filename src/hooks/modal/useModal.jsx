@@ -10,7 +10,6 @@ export const useModal = (props) => {
     // 设置初始值
     useEffect(() => {
         formArr.forEach((item) => {
-            console.log('item', item)
             if (item.value) {
                 form.setFieldValue('name', item.value)
             }
@@ -33,7 +32,7 @@ export const useModal = (props) => {
     const content = () => {
         return (
             <>
-              { modalVisible ? <Modal title={title} visible={modalVisible} footer={
+              <Modal title={title} visible={modalVisible} footer={
                     [
                         <Button key="back" onClick={handleCancel}>
                             取消
@@ -58,7 +57,7 @@ export const useModal = (props) => {
                                         label={item.title}
                                         name={item.name}
                                         key={index}
-                                        rules={[{ required: true, message: 'Please input your username!' }]}
+                                        rules={[{ required: true, message: 'Please input your departMendName!' }]}
                                     >
                                         <Input />
                                     </Form.Item>
@@ -68,7 +67,7 @@ export const useModal = (props) => {
                             <span>{tips}</span>
                         }
                     </Form>
-                </Modal> : null}
+                </Modal>
             </>
         )
     }
