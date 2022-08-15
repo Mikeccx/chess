@@ -7,19 +7,21 @@ export const useModal = (props) => {
     const [modalVisible, setModalVisible] = useState(false)
     const { formArr, handleOkCb, tips, title = "新增" } = props
     const [form] = Form.useForm()
-    // useEffect(() => {
-    //     formArr.forEach((item) => {
-    //         if (item.value) {
-    //             console.log('value: ', item.value)
-    //             form.setFieldValue({
-    //                 name: '12312'
-    //             })
-    //         }
-    //     })
-    // }, [])
-    const closeModal = () => {
-        setModalVisible(false)
+    // 设置初始值
+    useEffect(() => {
+        formArr.forEach((item) => {
+            console.log('item', item)
+            if (item.value) {
+                form.setFieldValue('name', item.value)
+            }
+        })
+    })
+    const formReset = () => {
         form.resetFields()
+    }
+    const closeModal = () => {
+        form.resetFields()
+        setModalVisible(false)
     }
     const showModal = () => {
         setModalVisible(true)
@@ -27,10 +29,11 @@ export const useModal = (props) => {
     const handleCancel = () => {
         closeModal()
     }
+    console.log('formArr', formArr)
     const content = () => {
         return (
             <>
-                <Modal title={title} visible={modalVisible} footer={
+              { modalVisible ? <Modal title={title} visible={modalVisible} footer={
                     [
                         <Button key="back" onClick={handleCancel}>
                             取消
@@ -42,7 +45,6 @@ export const useModal = (props) => {
                 }>
                     <Form
                         name="basic"
-                        initialValues={{ remember: true, name: formArr.length && formArr[0].value}}
                         onFinish={(value) =>{
                             handleOkCb(value)
                         }}
@@ -66,13 +68,14 @@ export const useModal = (props) => {
                             <span>{tips}</span>
                         }
                     </Form>
-                </Modal>
+                </Modal> : null}
             </>
         )
     }
     return {
         closeModal,
         showModal,
-        content
+        content,
+        formReset
     }
 }

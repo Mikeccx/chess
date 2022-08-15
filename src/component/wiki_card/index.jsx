@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import {Checkbox} from 'antd'
 import './wiki_card.less'
 import { changeSelectList, updateCardThunkAction, getListThunkAction } from '../../dao/action'
@@ -16,6 +16,16 @@ export default function WikiCard (props) {
         name: 'name',
         value: info.name
     }])
+    // useLayoutEffect(() => {
+
+    // })
+    useEffect(() => {
+        setForm([{
+            title: '空间名',
+            name: 'name',
+            value: info.name
+        }])
+    },[info])
     const handleOkCb = (val) => {
         dispatch(updateCardThunkAction({
             uuid: info.uuid,
@@ -24,7 +34,8 @@ export default function WikiCard (props) {
         dispatch(getListThunkAction())
         closeModal()
     }
-    const { showModal, closeModal , content } = useModal({formArr: formArr, handleOkCb: handleOkCb})
+    console.log('formArr1', formArr)
+        const { showModal, closeModal , content } = useModal({formArr: formArr, handleOkCb: handleOkCb})
 
     const { name, uuid } = props.info
     // 设置选中的卡片
