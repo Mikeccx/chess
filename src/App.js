@@ -27,8 +27,9 @@ function App() {
                             <WikiHeader/>
                         </Header>
                         <Routes>
-                            <Route path='/home' element={<Home/>}></Route>
+                            <Route path='/' element={<Wiki/>}></Route>
                             <Route path='/wiki' element={<Wiki/>}></Route>
+                            <Route path='/home' element={<Home/>}></Route>
                         </Routes>
                 </Layout>
             </Layout>

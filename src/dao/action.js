@@ -4,7 +4,7 @@ export const {fetchList, addCard, changeSelectList, updateCard, deleteCard} = cr
     FETCH_LIST: (data) => {
         return data
     },
-    ADD_CARD: (data) => {
+    ADD_CARD: async (data) => {
         return data
     },
     CHANGE_SELECT_LIST: (data) => {

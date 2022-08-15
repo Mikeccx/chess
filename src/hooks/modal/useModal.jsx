@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 
 export const useModal = (props) => {
     const [modalVisible, setModalVisible] = useState(false)
-    const { formArr, handleOkCb } = props
+    const { formArr, handleOkCb, tips, title = "新增" } = props
     const [form] = Form.useForm()
     // useEffect(() => {
     //     formArr.forEach((item) => {
@@ -30,7 +30,7 @@ export const useModal = (props) => {
     const content = () => {
         return (
             <>
-                <Modal title="新增" visible={modalVisible} footer={
+                <Modal title={title} visible={modalVisible} footer={
                     [
                         <Button key="back" onClick={handleCancel}>
                             取消
@@ -42,7 +42,7 @@ export const useModal = (props) => {
                 }>
                     <Form
                         name="basic"
-                        initialValues={{ remember: true, name: formArr[0].value}}
+                        initialValues={{ remember: true, name: formArr.length && formArr[0].value}}
                         onFinish={(value) =>{
                             handleOkCb(value)
                         }}
@@ -61,6 +61,9 @@ export const useModal = (props) => {
                                         <Input />
                                     </Form.Item>
                             ))
+                        }
+                        {
+                            <span>{tips}</span>
                         }
                     </Form>
                 </Modal>
